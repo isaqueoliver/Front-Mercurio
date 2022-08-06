@@ -1,46 +1,37 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { HttpClientModule } from '@angular/common/http';
-
+import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './pages/login/login.component';
-import { CriarContaComponent } from './pages/login/criar-conta/criar-conta.component';
-import { HomeComponent } from './pages/home/home.component';
-import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
-import { PerfilComponent } from './pages/perfil/perfil.component';
-import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
+import { NavegacaoModule } from './navegacao/navegacao.module';
+
+import { ErrorInterceptor } from './services/error.handler.service';
+
+export const httpInterceptorProviders = [
+  { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+];
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    CriarContaComponent,
-    HomeComponent,
-    NavigationBarComponent,
-    PerfilComponent,
-    CarrinhoComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
     AppRoutingModule,
+    NavegacaoModule,
+    NgbModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    // ToastrModule.forRoot(),
+    HttpClientModule
   ],
-  exports: [
-    FormsModule,
-    ReactiveFormsModule,
+  providers: [
+    httpInterceptorProviders
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

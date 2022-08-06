@@ -1,19 +1,17 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './pages/home/home.component';
-import { CriarContaComponent } from './pages/login/criar-conta/criar-conta.component';
-import { LoginComponent } from './pages/login/login.component';
-import { PerfilComponent } from './pages/perfil/perfil.component';
-import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
+import { Routes, RouterModule } from '@angular/router';
+
+import { HomeComponent } from './navegacao/home/home.component';
+import { NotFoundComponent } from './navegacao/not-found/not-found.component';
+import { AcessoNegadoComponent } from './navegacao/acesso-negado/acesso-negado.component';
+
 
 const routes: Routes = [
-  { path: '', component: LoginComponent, pathMatch: 'full'},
-  { path: 'login', component: LoginComponent, pathMatch: 'full'},
-  { path: 'criar-conta', component: CriarContaComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'perfil', component: PerfilComponent },
-  { path: 'carrinho', component: CarrinhoComponent }
+  { path: 'acesso-negado', component: AcessoNegadoComponent },
+  { path: 'nao-encontrado', component: NotFoundComponent },
+  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
