@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +26,7 @@ export const httpInterceptorProviders = [
     NavegacaoModule,
     NgbModule,
     BrowserAnimationsModule,
-    // ToastrModule.forRoot(),
+    ToastrModule.forRoot(),
     HttpClientModule
   ],
   providers: [

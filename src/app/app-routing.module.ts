@@ -9,6 +9,11 @@ import { AcessoNegadoComponent } from './navegacao/acesso-negado/acesso-negado.c
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
+  {
+    path: 'conta',
+    loadChildren: () => import('./conta/conta.module')
+      .then(m => m.ContaModule)
+  },
   { path: 'acesso-negado', component: AcessoNegadoComponent },
   { path: 'nao-encontrado', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }
