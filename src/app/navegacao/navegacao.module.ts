@@ -11,6 +11,8 @@ import { InserirValorComponent } from "./inserir-valor/inserir-valor.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MenuLoginComponent } from './menu-login/menu-login.component';
 import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
+import { ListaProdutosComponent } from './produtos/lista-produtos.component';
+import { CarouselProdutosComponent } from "./produtos/carousel-produtos.component";
 
 @NgModule({
     declarations: [
@@ -20,7 +22,9 @@ import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
         FooterComponent,
         NotFoundComponent,
         AcessoNegadoComponent,
-        InserirValorComponent
+        InserirValorComponent,
+        ListaProdutosComponent,
+        CarouselProdutosComponent
     ],
     imports: [
         CommonModule,
