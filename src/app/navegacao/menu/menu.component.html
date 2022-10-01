@@ -5,19 +5,30 @@
                 <img src="../../../assets/icon.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
                 Mercurio
             </a>
+            
             <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngbCollapse]="isCollapsed">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngbCollapse]="isCollapsed">                
 
                 <app-menu-login></app-menu-login>
 
-                <ul class="navbar-nav flex-grow-1">
-                    <!-- <li class="nav-item">
-                        <a class="nav-link text-dark" [routerLink]="['/home']">Home</a>
-                    </li> -->
+                <ul class="navbar-nav flex-grow-1 justify-content-md-end">
+
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                      </form>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white btn btn-primary mx-2" [routerLink]="['/mercados/listar-todos']">Mercados</a>
+                    </li>
                 </ul>
+
             </div>
+
         </div>
+        
     </nav>
 </header>
