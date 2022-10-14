@@ -24,6 +24,11 @@ const routes: Routes = [
     loadChildren: () => import('./mercado/mercado.module')
     .then(m => m.MercadoModule)
   },
+  {
+    path: 'carrinho',
+    loadChildren: () => import('./carrinho/carrinho.module')
+    .then(m => m.CarrinhoModule)
+  },
   { path: 'acesso-negado', component: AcessoNegadoComponent },
   { path: 'nao-encontrado', component: NotFoundComponent },
   { path: '**', component: NotFoundComponent }
