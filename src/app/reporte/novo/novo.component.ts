@@ -7,16 +7,16 @@ import { Observable, fromEvent, merge } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { ImageCroppedEvent, ImageTransform, Dimensions } from 'ngx-image-cropper';
 
-import { ProdutoService } from '../services/produto.service';
+import { ReporteService } from '../services/reporte.service';
 import { CurrencyUtils } from 'src/app/utils/currency-utils';
-import { ProdutoBaseComponent } from '../produto-form.base.component';
+import { ReporteBaseComponent } from '../reporte-form.base.component';
 
 
 @Component({
   selector: 'app-novo',
   templateUrl: './novo.component.html'
 })
-export class NovoComponent extends ProdutoBaseComponent implements OnInit {
+export class NovoComponent extends ReporteBaseComponent implements OnInit {
 
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[] = [];
 
@@ -32,28 +32,12 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
   imagemNome: string = '';
 
   constructor(private fb: FormBuilder,
-    private produtoService: ProdutoService,
+    private reporteService: ReporteService,
     private router: Router,
     private toastr: ToastrService) { super(); }
 
   ngOnInit(): void {
-
-    this.produtoService.obterFornecedores()
-      .subscribe(
-        fornecedores => this.fornecedores = fornecedores);
-
-        this.fornecedores = [{
-          id: '1',
-          nome: 'Bretas'
-        },{
-          id: '2',
-          nome: 'Consul'
-        },{
-          id: '3',
-          nome: 'Garcias'
-        },];
-
-    this.produtoForm = this.fb.group({
+    this.reporteForm = this.fb.group({
       fornecedorId: ['', [Validators.required]],
       nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
       descricao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1000)]],
@@ -67,15 +51,15 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
     super.configurarValidacaoFormulario(this.formInputElements);
   }
 
-  adicionarProduto() {
-    if (this.produtoForm.dirty && this.produtoForm.valid) {
-      this.produto = Object.assign({}, this.produto, this.produtoForm.value);
+  adicionarReporte() {
+    if (this.reporteForm.dirty && this.reporteForm.valid) {
+      this.reporte = Object.assign({}, this.reporte, this.reporteForm.value);
 
-      this.produto.imagemUpload = this.croppedImage.split(',')[1];
-      this.produto.imagem = this.imagemNome;
-      this.produto.valor = CurrencyUtils.StringParaDecimal(this.produto.valor.toString()) || 0;
+      this.reporte.imagemUpload = this.croppedImage.split(',')[1];
+      this.reporte.imagem = this.imagemNome;
+      this.reporte.valor = CurrencyUtils.StringParaDecimal(this.reporte.valor.toString()) || 0;
 
-      this.produtoService.novoProduto(this.produto)
+      this.reporteService.novoReporte(this.reporte)
         .subscribe({
           next: sucesso => { this.processarSucesso(sucesso) },
           error: falha => { this.processarFalha(falha) }
@@ -86,13 +70,13 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
   }
 
   processarSucesso(response: any) {
-    this.produtoForm.reset();
+    this.reporteForm.reset();
     this.errors = [];
 
-    let toast = this.toastr.success('Produto cadastrado com sucesso!', 'Sucesso!');
+    let toast = this.toastr.success('Reporte cadastrado com sucesso!', 'Sucesso!');
     if (toast) {
       toast.onHidden.subscribe(() => {
-        this.router.navigate(['/produtos/listar-todos']);
+        this.router.navigate(['/reportes/listar-todos']);
       });
     }
   }

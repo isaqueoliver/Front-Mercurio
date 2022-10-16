@@ -1,0 +1,62 @@
+<div class="container main-container">
+
+    <h1>Lista de Reportes</h1>
+    <hr>
+
+    <p>
+        <a class="btn btn-info" [routerLink]="['/reportes/adicionar-novo']">Novo Reporte</a>
+    </p>
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    Fornecedor
+                </th>
+                <th>
+                    Valor
+                </th>
+                <th>
+                    Ativo?
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reporte of reportes">
+                <td>
+                    <img src="{{ imagens }}{{ reporte.imagem }}" style="width: 70px; height: 100px">
+                </td>
+                <td>
+                    {{ reporte.nome }}
+                </td>
+                <td>
+                    {{ reporte.nomeFornecedor }}
+                </td>
+                <td>
+                    {{ reporte.valor }}
+                </td>
+                <td>
+                    <input [checked]="reporte.ativo" class="check-box" disabled="disabled" type="checkbox">
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-warning" [routerLink]="['/reportes/detalhes',reporte.id]">
+                        <span class="fa fa-search"></span>
+                    </a>&nbsp;
+                    <a class="btn btn-info" [routerLink]="['/reportes/editar',reporte.id]">
+                        <span class="fa fa-pencil-alt"></span>
+                    </a>&nbsp;
+                    <a class="btn btn-danger" [routerLink]="['/reportes/excluir',reporte.id]">
+                        <span class="fa fa-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
