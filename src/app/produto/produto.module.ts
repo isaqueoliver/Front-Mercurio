@@ -9,8 +9,6 @@ import { ProdutoRoutingModule } from './produto.route';
 import { ProdutoAppComponent } from './produto.app.component';
 import { ListaComponent } from './lista/lista.component';
 import { NovoComponent } from './novo/novo.component';
-import { ExcluirComponent } from './excluir/excluir.component';
-import { DetalhesComponent } from './detalhes/detalhes.component';
 import { ProdutoService } from './services/produto.service';
 import { ProdutoResolve } from './services/produto.resolve';
 import { ProdutoGuard } from './services/produto.guard';
@@ -20,8 +18,6 @@ import { ProdutoGuard } from './services/produto.guard';
     ProdutoAppComponent,
     ListaComponent,
     NovoComponent,
-    ExcluirComponent,
-    DetalhesComponent
   ],
   imports: [
     CommonModule,

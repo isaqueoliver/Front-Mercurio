@@ -17,10 +17,24 @@ export class ListaComponent implements OnInit {
   constructor(private mercadoService: MercadoService) { }
 
   ngOnInit(): void {
-    this.mercadoService.obterTodos()
-      .subscribe({
-        next: mercados => this.mercados = mercados,
-        error: error => this.errorMessage
-      });
+    // this.mercadoService.obterTodos()
+    //   .subscribe({
+    //     next: mercados => this.mercados = mercados,
+    //     error: error => this.errorMessage
+    //   });
+    this.mercados = [
+      {
+        dataCadastro: '19/04/2022',
+        id: '1234',
+        nome: 'Garcias',
+        endereco: 'Rua Teste, n540, Bairro Teste'
+      },
+      {
+        dataCadastro: '19/04/2022',
+        id: '1234',
+        nome: 'Bretas',
+        endereco: 'Rua Joao, numero 845, Bairro Treza'
+      },
+    ];
   }
 }

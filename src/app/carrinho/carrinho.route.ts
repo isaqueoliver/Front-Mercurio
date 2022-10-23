@@ -6,7 +6,7 @@ import { CarrinhoGuard } from './services/carrinho.guard';
 const carrinhoRouterConfig: Routes = [
     {
         path: '', component: ListaComponent,
-        canActivate: [CarrinhoGuard]
+        //canActivate: [CarrinhoGuard]
     }
 ];
 

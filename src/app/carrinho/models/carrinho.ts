@@ -1,12 +1,13 @@
 export interface Carrinho {
   id: string,
+  produtos: ProdutoUsuario[],
+  mercado: string,
+  total: number
+}
+
+export interface ProdutoUsuario {
+  id: string,
   nome: string,
-  descricao: string,
-  imagem: string,
-  imagemUpload: string;
   valor: number,
-  dataCadastro: string,
-  ativo: true,
-  fornecedorId: string,
-  nomeFornecedor: string
+  imagem: string
 }

@@ -38,12 +38,8 @@ export class NovoComponent extends ReporteBaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.reporteForm = this.fb.group({
-      fornecedorId: ['', [Validators.required]],
-      nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
+      assunto: ['', [Validators.required, Validators.minLength(2)]],
       descricao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1000)]],
-      imagem: ['', [Validators.required]],
-      valor: ['', [Validators.required]],
-      ativo: [true]
     });
   }
 
@@ -54,10 +50,6 @@ export class NovoComponent extends ReporteBaseComponent implements OnInit {
   adicionarReporte() {
     if (this.reporteForm.dirty && this.reporteForm.valid) {
       this.reporte = Object.assign({}, this.reporte, this.reporteForm.value);
-
-      this.reporte.imagemUpload = this.croppedImage.split(',')[1];
-      this.reporte.imagem = this.imagemNome;
-      this.reporte.valor = CurrencyUtils.StringParaDecimal(this.reporte.valor.toString()) || 0;
 
       this.reporteService.novoReporte(this.reporte)
         .subscribe({

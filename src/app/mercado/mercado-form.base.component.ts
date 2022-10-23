@@ -1,4 +1,4 @@
-import { Mercado, Fornecedor } from './models/mercado';
+import { Mercado } from './models/mercado';
 import { FormGroup } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 
@@ -7,7 +7,7 @@ import { FormBaseComponent } from '../base-components/form-base.component';
 export abstract class MercadoBaseComponent extends FormBaseComponent {
     
     mercado: Mercado = {} as Mercado;
-    fornecedores: Fornecedor[] = [];
+    Mercados: Mercado[] = [];
     errors: any[] = [];
     mercadoForm: FormGroup = {} as FormGroup;
 
@@ -15,8 +15,8 @@ export abstract class MercadoBaseComponent extends FormBaseComponent {
         super();
 
         this.validationMessages = {
-            fornecedorId: {
-                required: 'Escolha um fornecedor',
+            MercadoId: {
+                required: 'Escolha um Mercado',
             },
             nome: {
                 required: 'Informe o Nome',

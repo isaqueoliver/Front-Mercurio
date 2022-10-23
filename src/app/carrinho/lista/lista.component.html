@@ -1,62 +1,37 @@
 <div class="container main-container">
 
-    <h1>Lista de Carrinhos</h1>
-    <hr>
+    <div *ngIf="!carrinho">
+        <img class="w-100" src="https://i.imgur.com/qinyrpn.jpg" title="source: imgur.com" />
+    </div>
 
-    <p>
-        <a class="btn btn-info" [routerLink]="['/carrinhos/adicionar-novo']">Novo Carrinho</a>
-    </p>
+    <div *ngIf="carrinho">
+        <p>
+            <a class="btn btn-outline-danger">Excluir Carrinho</a>
+        </p>
+        <div *ngFor="let produto of carrinho.produtos" class="card w-auto">
+            <div class="row g-0 w-auto">
+                <div class="col-md-4">
+                    <img src="{{ produto.imagem }}" class="mg-fluid img-thumbnail" style="max-width: 110px !important;" alt="...">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ produto.nome }}</h5>
+                        <p class="card-text">{{ produto.valor | currency: 'R$' }}</p>
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex align-items-center">
+                    <button class="btn btn-danger">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-    <table class="table table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th>
+        <hr />
+        <div class="text-center">
+            <p class="fs-1">Melhor mercado foi: {{ carrinho.mercado }}</p>
+            <p class="fs-3">Total {{ carrinho.total | currency: 'R$' }}</p>
+        </div>
+    </div>
 
-                </th>
-                <th>
-                    Nome
-                </th>
-                <th>
-                    Fornecedor
-                </th>
-                <th>
-                    Valor
-                </th>
-                <th>
-                    Ativo?
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let carrinho of carrinhos">
-                <td>
-                    <img src="{{ imagens }}{{ carrinho.imagem }}" style="width: 70px; height: 100px">
-                </td>
-                <td>
-                    {{ carrinho.nome }}
-                </td>
-                <td>
-                    {{ carrinho.nomeFornecedor }}
-                </td>
-                <td>
-                    {{ carrinho.valor }}
-                </td>
-                <td>
-                    <input [checked]="carrinho.ativo" class="check-box" disabled="disabled" type="checkbox">
-                </td>
-                <td class="text-right">
-                    <a class="btn btn-warning" [routerLink]="['/carrinhos/detalhes',carrinho.id]">
-                        <span class="fa fa-search"></span>
-                    </a>&nbsp;
-                    <a class="btn btn-info" [routerLink]="['/carrinhos/editar',carrinho.id]">
-                        <span class="fa fa-pencil-alt"></span>
-                    </a>&nbsp;
-                    <a class="btn btn-danger" [routerLink]="['/carrinhos/excluir',carrinho.id]">
-                        <span class="fa fa-trash"></span>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </div>

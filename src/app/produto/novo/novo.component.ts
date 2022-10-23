@@ -38,11 +38,11 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.produtoService.obterFornecedores()
-      .subscribe(
-        fornecedores => this.fornecedores = fornecedores);
+    // this.produtoService.obterMercadoes()
+    //   .subscribe(
+    //     Mercadoes => this.Mercadoes = Mercadoes);
 
-        this.fornecedores = [{
+        this.Mercadoes = [{
           id: '1',
           nome: 'Bretas'
         },{
@@ -54,7 +54,7 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
         },];
 
     this.produtoForm = this.fb.group({
-      fornecedorId: ['', [Validators.required]],
+      MercadoId: ['', [Validators.required]],
       nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
       descricao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1000)]],
       imagem: ['', [Validators.required]],
@@ -71,9 +71,9 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
     if (this.produtoForm.dirty && this.produtoForm.valid) {
       this.produto = Object.assign({}, this.produto, this.produtoForm.value);
 
-      this.produto.imagemUpload = this.croppedImage.split(',')[1];
-      this.produto.imagem = this.imagemNome;
-      this.produto.valor = CurrencyUtils.StringParaDecimal(this.produto.valor.toString()) || 0;
+      // this.produto.imagemUpload = this.croppedImage.split(',')[1];
+      // this.produto.imagem = this.imagemNome;
+      // this.produto.valor = CurrencyUtils.StringParaDecimal(this.produto.valor.toString()) || 0;
 
       this.produtoService.novoProduto(this.produto)
         .subscribe({

@@ -15,12 +15,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label">Fornecedor</label>
-                    <select class="form-control" id="fornecedorId" formControlName="fornecedorId" [ngClass]="{'is-invalid': displayMessage['fornecedorId'] }">
-                        <option *ngFor="let fornecedor of fornecedores" value="{{ fornecedor.id }}">{{ fornecedor.nome }}</option>
+                    <label class="control-label">Mercado</label>
+                    <select class="form-control" id="MercadoId" formControlName="MercadoId" [ngClass]="{'is-invalid': displayMessage['MercadoId'] }">
+                        <option *ngFor="let Mercado of Mercados" value="{{ Mercado.id }}">{{ Mercado.nome }}</option>
                     </select>
-                    <span class="text-danger" *ngIf="displayMessage['fornecedorId']">
-                        <p [innerHTML]="displayMessage['fornecedorId']"></p>
+                    <span class="text-danger" *ngIf="displayMessage['MercadoId']">
+                        <p [innerHTML]="displayMessage['MercadoId']"></p>
                     </span>
                 </div>
 

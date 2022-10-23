@@ -16,8 +16,12 @@ export class MenuLoginComponent {
   constructor(private router: Router) {  }
 
   usuarioLogado(): boolean {
-    this.token = this.localStorageUtils.obterTokenUsuario();
-    this.user = this.localStorageUtils.obterUsuario();
+    // this.token = this.localStorageUtils.obterTokenUsuario();
+    // this.user = this.localStorageUtils.obterUsuario();
+    this.token = "dkpasdksaopdkaspodkaspdokaso";
+    this.user = {
+      email: "isaque@teste.com.br"
+    };
 
     if (this.user)
       this.email = this.user.email;

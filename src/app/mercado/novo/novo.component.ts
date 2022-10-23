@@ -38,12 +38,12 @@ export class NovoComponent extends MercadoBaseComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.mercadoService.obterFornecedores()
-      .subscribe(
-        fornecedores => this.fornecedores = fornecedores);
+    // this.mercadoService.obterMercadoes()
+    //   .subscribe(
+    //     Mercadoes => this.Mercadoes = Mercadoes);
 
     this.mercadoForm = this.fb.group({
-      fornecedorId: ['', [Validators.required]],
+      MercadoId: ['', [Validators.required]],
       nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
       descricao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1000)]],
       imagem: ['', [Validators.required]],
@@ -59,10 +59,6 @@ export class NovoComponent extends MercadoBaseComponent implements OnInit {
   adicionarMercado() {
     if (this.mercadoForm.dirty && this.mercadoForm.valid) {
       this.mercado = Object.assign({}, this.mercado, this.mercadoForm.value);
-
-      this.mercado.imagemUpload = this.croppedImage.split(',')[1];
-      this.mercado.imagem = this.imagemNome;
-      this.mercado.valor = CurrencyUtils.StringParaDecimal(this.mercado.valor.toString()) || 0;
 
       this.mercadoService.novoMercado(this.mercado)
         .subscribe({

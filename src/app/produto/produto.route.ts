@@ -3,8 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProdutoAppComponent } from './produto.app.component';
 import { ListaComponent } from './lista/lista.component';
 import { NovoComponent } from './novo/novo.component';
-import { DetalhesComponent } from './detalhes/detalhes.component';
-import { ExcluirComponent } from './excluir/excluir.component';
 import { ProdutoResolve } from './services/produto.resolve';
 import { ProdutoGuard } from './services/produto.guard';
 
@@ -18,20 +16,6 @@ const produtoRouterConfig: Routes = [
                 canDeactivate: [ProdutoGuard],
                 //canActivate: [ProdutoGuard],
                 data: [{ claim: { nome: 'Produto', valor: 'Adicionar' } }],
-            },
-            {
-                path: 'detalhes/:id', component: DetalhesComponent,
-                resolve: {
-                    produto: ProdutoResolve
-                }
-            },
-            {
-                path: 'excluir/:id', component: ExcluirComponent,
-                canActivate: [ProdutoGuard],
-                data: [{ claim: { nome: 'Produto', valor: 'Excluir' } }],
-                resolve: {
-                    produto: ProdutoResolve
-                }
             },
         ]
     }

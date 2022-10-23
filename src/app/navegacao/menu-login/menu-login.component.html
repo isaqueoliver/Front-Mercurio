@@ -7,7 +7,19 @@
     </li>
 
     <li *ngSwitchCase="true" class="nav-item">
-        <a class="nav-link text-dark" id="saudacaoUsuario" href="javascript:void(0)">{{ email }}</a>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="saudacaoUsuario"
+                href="javascript:void(0)" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ email }}
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Minhas Informações</a></li>
+                    <li><a class="dropdown-item" href="#">Meus Envios</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- <a class="nav-link text-dark" id="saudacaoUsuario" href="javascript:void(0)">{{ email }}</a> -->
     </li>
     <li *ngSwitchCase="true" class="nav-item">
         <a class="nav-link text-dark" href="javascript:void(0)" (click)="logout()">

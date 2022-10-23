@@ -14,8 +14,8 @@ export abstract class ReporteBaseComponent extends FormBaseComponent {
         super();
 
         this.validationMessages = {
-            fornecedorId: {
-                required: 'Escolha um fornecedor',
+            MercadoId: {
+                required: 'Escolha um Mercado',
             },
             nome: {
                 required: 'Informe o Nome',

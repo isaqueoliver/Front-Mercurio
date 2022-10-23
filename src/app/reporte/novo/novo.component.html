@@ -14,69 +14,36 @@
                     </ul>
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label">Nome</label>
+                <div class="form-group my-3">
+                    <label class="control-label">Assunto</label>
                     <div>
-                        <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)" formControlName="nome" [ngClass]="{'is-invalid': displayMessage['nome'] }" />
-                        <span class="text-danger" *ngIf="displayMessage['nome']">
-                            <p [innerHTML]="displayMessage['nome']"></p>
+                        <select class="form-select w-100" id="assunto" formControlName="assunto"
+                            [ngClass]="{'is-invalid': displayMessage['assunto'] }" aria-label="Assunto">
+                            <option value="" hidden selected>Selecione uma opção</option>
+                            <option>Está faltando o nome de um Supermercado/Mercado</option>
+                        </select>
+                        <span class="text-danger" *ngIf="displayMessage['assunto']">
+                            <p [innerHTML]="displayMessage['assunto']"></p>
                         </span>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group my-3">
                     <label class="control-label">Descrição</label>
                     <div>
-                        <textarea cols="40" rows="5" maxlength="1000" class="form-control" id="descricao" placeholder="Descrição (requerido)" formControlName="descricao" [ngClass]="{'is-invalid': displayMessage['descricao'] }"></textarea>
+                        <textarea cols="40" rows="5" maxlength="1000" class="form-control" id="descricao"
+                            placeholder="Descrição (requerido)" formControlName="descricao"
+                            [ngClass]="{'is-invalid': displayMessage['descricao'] }">
+                        </textarea>
                         <span class="text-danger" *ngIf="displayMessage['descricao']">
                             <p [innerHTML]="displayMessage['descricao']"></p>
                         </span>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label">Imagem do Reporte</label>
-
-                    <div class="custom-file">
-                        <input type="file" accept="image/jpeg,image/png" class="custom-file-input" id="imagem" formControlName="imagem" (change)="fileChangeEvent($event)" [ngClass]="{'is-invalid': displayMessage['imagem'] }">
-                        <label data-browse="Procurar" style="width: 400px" class="custom-file-label"></label>
-                        <span *ngIf='imagemNome'><br>{{ imagemNome }}<br></span>
-                        <span class="text-danger" *ngIf="displayMessage['imagem']">
-                            <p [innerHTML]="displayMessage['imagem']"></p>
-                        </span>
-                    </div>
-
-                    <div *ngIf='imagemNome' class="row">
-                        <div class="col col-md-6">
-                            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false" [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="4 / 3" [resizeToWidth]="256" [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false"
-                                [canvasRotation]="canvasRotation" [transform]="transform" [alignImage]="'left'" [style.display]="showCropper ? null : 'none'" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady($event)"
-                                (loadImageFailed)="loadImageFailed()"></image-cropper>
-                        </div>
-                        <div class="col col-md-6">
-                            <img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label">Valor</label>
-                    <div>
-                        <input class="form-control" id="valor" type="text" placeholder="Valor (requerido)" formControlName="valor" [ngClass]="{'is-invalid': displayMessage['valor'] }" />
-                        <span class="text-danger" *ngIf="displayMessage['valor']">
-                            <p [innerHTML]="displayMessage['valor']"></p>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" id="ativo" formControlName="ativo" name="ativo" value="true"> Ativo?
-                    </label>
-                </div>
-
-                <div class="form-group">
+                <div class="form-group my-3 d-flex justify-content-between">
                     <input type="submit" id="cadastroReporte" [disabled]="!reporteForm.valid" value="Cadastrar" class="btn btn-primary">&nbsp;
-                    <a class="btn btn-info" href="/reportes/listar-todos">Voltar</a>
+                    <a class="btn btn-danger" href="/reportes/listar-todos">Voltar</a>
                 </div>
             </form>
         </div>

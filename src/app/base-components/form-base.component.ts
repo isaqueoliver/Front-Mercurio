@@ -30,6 +30,7 @@ export abstract class FormBaseComponent {
     }
 
     protected validarFormulario(formGroup: FormGroup) {
+        console.warn("---MUDANCAS_SALVAS---");console.warn(this.mudancasNaoSalvas);
         this.displayMessage = this.genericValidator.processarMensagens(formGroup);
         this.mudancasNaoSalvas = true;
     }

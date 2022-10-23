@@ -1,12 +1,13 @@
 export interface Reporte {
   id: string,
-  nome: string,
+  assunto: string,
   descricao: string,
-  imagem: string,
-  imagemUpload: string;
-  valor: number,
   dataCadastro: string,
-  ativo: true,
-  fornecedorId: string,
-  nomeFornecedor: string
+  status: string,
+  resposta: string | null
+}
+
+export class ReporteConstantes {
+  static readonly STATUS_AGUARDANDO: string = "Aguardando Resposta...";
+  static readonly STATUS_RESPONDIDO: string = "Respondido";
 }

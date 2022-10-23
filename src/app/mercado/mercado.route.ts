@@ -16,7 +16,7 @@ const mercadoRouterConfig: Routes = [
             {
                 path: 'adicionar-novo', component: NovoComponent,
                 canDeactivate: [MercadoGuard],
-                canActivate: [MercadoGuard],
+                //canActivate: [MercadoGuard],
                 data: [{ claim: { nome: 'Mercado', valor: 'Adicionar' } }],
             },
             {

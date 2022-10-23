@@ -1,32 +1,71 @@
-<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
-    <div class="carousel-indicators">
-      <button *ngFor="let produto of produtos; let i = index"
-              type="button" data-bs-target="#carouselExampleCaptions"
-              [attr.data-bs-slide-to]="i" class="active"
-              aria-current="true" aria-label="Slide 1">
-      </button>
-    </div>
-    <div class="carousel-inner">
+<style>
+@media (max-width: 767px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+}
 
-      <div *ngFor="let produto of produtos" class="carousel-item active">
-        
-        <img src="https://d3ugyf2ht6aenh.cloudfront.net/stores/746/397/products/alface_crespa_verde11-6cdc6c45a50159039e15220193868199-1024-1024.jpg" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block text-bg-primary">
-          <h5>First slide label</h5>
-          <p>Some representative placeholder content for the first slide.</p>
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* medium and up screens */
+@media (min-width: 768px) {
+    
+    .carousel-inner .carousel-item-end.active,
+    .carousel-inner .carousel-item-next {
+      transform: translateX(1.5%);
+    }
+    
+    .carousel-inner .carousel-item-start.active, 
+    .carousel-inner .carousel-item-prev {
+      transform: translateX(-1.5%);
+    }
+}
+
+.carousel-inner .carousel-item-end,
+.carousel-inner .carousel-item-start { 
+  transform: translateX(0);
+}
+
+</style>
+
+<div class="container">
+  <div class="row mx-auto my-auto justify-content-center text-center">
+      <div id="produtoCarousel" class="carousel slide" data-bs-ride="carousel">
+
+        <div class="carousel-inner" role="listbox">
+
+          <div *ngFor="let produto of produtos; let i = index" [ngClass]="['carousel-item', isActive(i) ]">
+
+              <div *ngFor="let produto of produtos; let j = index" class="col-md-3">
+                <div class="card">
+                  <div class="card-img">
+                    <img src="{{ produto.imagem }}" class="img-fluid">
+                  </div>
+                  <div class="fs-4 fw-semibold">{{ produto.nome }} {{correctIndex(j+i)}}</div>
+                </div>
+              </div>
+
+          </div> 
+
         </div>
+
+        <a class="btn carousel-control-prev" href="#produtoCarousel" (click)="previous()" role="button" data-bs-slide="prev">
+          <i class="fa-solid fa-caret-left text-black display-1"></i>
+            <!-- <span class="carousel-control-prev-icon bg-black" aria-hidden="true"></span> -->
+        </a>
+        <a class="btn carousel-control-next" href="#produtoCarousel" (click)="next()" role="button" data-bs-slide="next">
+          <i class="fa-solid fa-caret-right text-black display-1"></i>
+            <!-- <span class="carousel-control-next-icon bg-black" aria-hidden="true"></span> -->
+        </a>
+
       </div>
-
-    </div>
-
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon text-bg-dark" aria-hidden="true"></span>
-      <span class="visually-hidden">Anterior</span>
-    </button>
-
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-      <span class="carousel-control-next-icon text-bg-dark" aria-hidden="true"></span>
-      <span class="visually-hidden">Proximo</span>
-    </button>
-
   </div>
+
+</div>

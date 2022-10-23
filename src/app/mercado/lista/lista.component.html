@@ -3,60 +3,22 @@
     <h1>Lista de Mercados</h1>
     <hr>
 
-    <p>
+    <!-- <p>
         <a class="btn btn-info" [routerLink]="['/mercados/adicionar-novo']">Novo Mercado</a>
-    </p>
+    </p> -->
 
-    <table class="table table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th>
+    <div *ngFor="let mercado of mercados" class="card mb-3 w-auto">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="https://i.imgur.com/QubgFZO.png" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ mercado.nome }}</h5>
+                    <p class="card-text">{{ mercado.endereco }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                </th>
-                <th>
-                    Nome
-                </th>
-                <th>
-                    Fornecedor
-                </th>
-                <th>
-                    Valor
-                </th>
-                <th>
-                    Ativo?
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let mercado of mercados">
-                <td>
-                    <img src="{{ imagens }}{{ mercado.imagem }}" style="width: 70px; height: 100px">
-                </td>
-                <td>
-                    {{ mercado.nome }}
-                </td>
-                <td>
-                    {{ mercado.nomeFornecedor }}
-                </td>
-                <td>
-                    {{ mercado.valor }}
-                </td>
-                <td>
-                    <input [checked]="mercado.ativo" class="check-box" disabled="disabled" type="checkbox">
-                </td>
-                <td class="text-right">
-                    <a class="btn btn-warning" [routerLink]="['/mercados/detalhes',mercado.id]">
-                        <span class="fa fa-search"></span>
-                    </a>&nbsp;
-                    <a class="btn btn-info" [routerLink]="['/mercados/editar',mercado.id]">
-                        <span class="fa fa-pencil-alt"></span>
-                    </a>&nbsp;
-                    <a class="btn btn-danger" [routerLink]="['/mercados/excluir',mercado.id]">
-                        <span class="fa fa-trash"></span>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </div>

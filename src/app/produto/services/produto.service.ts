@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 
 import { BaseService } from 'src/app/services/base.service';
-import { Produto, Fornecedor } from '../models/produto';
+import { Produto, Mercado } from '../models/produto';
 
 @Injectable()
 export class ProdutoService extends BaseService {
@@ -48,9 +48,9 @@ export class ProdutoService extends BaseService {
                 catchError(super.serviceError));
     }    
 
-    obterFornecedores(): Observable<Fornecedor[]> {
+    obterMercadoes(): Observable<Mercado[]> {
         return this.http
-            .get<Fornecedor[]>(this.UrlServiceV1 + "fornecedores")
+            .get<Mercado[]>(this.UrlServiceV1 + "Mercadoes")
             .pipe(catchError(super.serviceError));
     }
 }

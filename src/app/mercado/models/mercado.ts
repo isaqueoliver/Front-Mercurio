@@ -1,17 +1,11 @@
 export interface Mercado {
   id: string,
   nome: string,
-  descricao: string,
-  imagem: string,
-  imagemUpload: string;
-  valor: number,
-  dataCadastro: string,
-  ativo: true,
-  fornecedorId: string,
-  nomeFornecedor: string
+  endereco: string,
+  dataCadastro: string
 }
 
-export interface Fornecedor{
+export interface Mercado{
   id: string,
   nome: string,
 }
