@@ -1,14 +1,29 @@
 <!-- Page Content -->
-<header class="py-5 mb-5" style="background-color: rgba(128, 128, 128, 0.373);">
+<header class="py-5 mb-5">
 
-    <carousel-produto [produtos]="produtos"></carousel-produto>
+    <div class="container">
+        <div class="row mx-auto my-auto justify-content-center text-center">
+            <form class="d-flex w-100 my-2" role="search">
+                <input class="form-control" type="text" placeholder="Arroz, Coelho Diniz..." aria-label="Campo para pesquisar produto ou mercado">
+                <select class="btn btn-primary dropdown-toggle me-2">
+                    <option value="1" selected>Produto</option>
+                    <option value="2">Mercado</option>
+                </select>
+                <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+            </form>
+
+            <carousel-produto [produtos]="produtos"></carousel-produto>
+
+        </div>
+    </div>
 
 </header>
 
 <div class="container main-container">
     <div class="row text-center">
 
-        <lista-produto class="row" [produtos]="produtos"></lista-produto>
+        <!-- <lista-produto class="row" [produtos]="produtos"></lista-produto> -->
+        <app-lista></app-lista>
 
     </div>
 </div>

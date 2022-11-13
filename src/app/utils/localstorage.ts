@@ -10,7 +10,7 @@ export class LocalStorageUtils {
 
     public salvarDadosLocaisUsuario(response: any) {
         this.salvarTokenUsuario(response.accessToken);
-        this.salvarUsuario(response.userToken);
+        this.salvarUsuario(response.usuarioToken);
     }
 
     public limparDadosLocaisUsuario() {
@@ -27,6 +27,7 @@ export class LocalStorageUtils {
     }
 
     public salvarUsuario(user: string) {
+        console.log(user);
         localStorage.setItem('mercurio.user', JSON.stringify(user));
     }
 

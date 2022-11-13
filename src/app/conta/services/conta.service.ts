@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Usuario } from '../models/usuario';
+import { UsuarioCadastro, UsuarioLogin, UsuarioResponse } from '../models/usuario';
 
 import { Observable } from 'rxjs';
 import { catchError, map } from "rxjs/operators";
@@ -11,7 +11,7 @@ export class ContaService extends BaseService {
 
     constructor(private http: HttpClient) { super(); }
 
-    registrarUsuario(usuario: Usuario): Observable<Usuario> {
+    registrarUsuario(usuario: UsuarioCadastro): Observable<UsuarioResponse> {
         let response = this.http
             .post(this.UrlServiceV1 + 'nova-conta', usuario, this.ObterHeaderJson())
             .pipe(
@@ -21,9 +21,9 @@ export class ContaService extends BaseService {
         return response;
     }
 
-    login(usuario: Usuario): Observable<Usuario> {
+    login(usuario: UsuarioLogin): Observable<UsuarioResponse> {
         let response = this.http
-            .post(this.UrlServiceV1 + 'entrar', usuario, this.ObterHeaderJson())
+            .post(this.UrlServiceV1 + 'autenticar', usuario, this.ObterHeaderJson())
             .pipe(
                 map(this.extractData),
                 catchError(this.serviceError));

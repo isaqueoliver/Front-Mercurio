@@ -13,6 +13,9 @@ import { MenuLoginComponent } from './menu-login/menu-login.component';
 import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
 import { ListaProdutosComponent } from './produtos/lista-produtos.component';
 import { CarouselProdutosComponent } from "./produtos/carousel-produtos.component";
+import { ProdutoModule } from "../produto/produto.module";
+import { EstadoModule } from "../estado/estado.module";
+import { CidadeModule } from "../cidade/cidade.module";
 
 @NgModule({
     declarations: [
@@ -29,7 +32,10 @@ import { CarouselProdutosComponent } from "./produtos/carousel-produtos.componen
     imports: [
         CommonModule,
         RouterModule,
-        NgbModule
+        NgbModule,
+        ProdutoModule,
+        EstadoModule,
+        CidadeModule
     ],
     exports: [
         MenuComponent,

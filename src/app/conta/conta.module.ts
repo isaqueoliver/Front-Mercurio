@@ -13,6 +13,8 @@ import { ContaService } from './services/conta.service';
 
 import { CustomFormsModule } from 'ng2-validation'
 import { ContaGuard } from './services/conta.guard';
+import { EstadoModule } from '../estado/estado.module';
+import { CidadeModule } from '../cidade/cidade.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ContaGuard } from './services/conta.guard';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CustomFormsModule
+    CustomFormsModule,
+    EstadoModule,
+    CidadeModule
   ],
   providers: [
     ContaService,

@@ -27,6 +27,7 @@ import { ProdutoGuard } from './services/produto.guard';
     ReactiveFormsModule,
     ImageCropperModule
   ],
+  exports: [ ListaComponent ],
   providers: [
     ProdutoService,
     ProdutoResolve,

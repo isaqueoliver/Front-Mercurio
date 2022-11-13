@@ -14,7 +14,7 @@ const produtoRouterConfig: Routes = [
             {
                 path: 'adicionar-novo', component: NovoComponent,
                 canDeactivate: [ProdutoGuard],
-                //canActivate: [ProdutoGuard],
+                canActivate: [ProdutoGuard],
                 data: [{ claim: { nome: 'Produto', valor: 'Adicionar' } }],
             },
         ]
