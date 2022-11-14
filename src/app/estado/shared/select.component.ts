@@ -19,16 +19,23 @@ export class SelectEstadoComponent implements OnInit {
                         .subscribe(
                             Estados => {
                                 this.estados = Estados;
-                                if(this.estadoService.LocalStorage.obterUsuario()) this.estadoSelecionado.emit(this.estadoService.LocalStorage.obterUsuario().estado);
-                                else this.estadoSelecionado.emit(this.estados[0]?.id);
+                                if(this.estadoService.LocalStorage.obterTokenUsuario() &&
+                                   this.estadoService.LocalStorage.obterCidade().length === 0)
+                                        this.estadoSelecionado.emit(this.estadoService.LocalStorage.obterEstado());
+                                else if(this.estadoService.LocalStorage.obterCidade().length === 0){
+                                    this.estadoService.LocalStorage.salvarEstado(this.estados[0]?.id);
+                                    this.estadoSelecionado.emit(this.estados[0]?.id);
+                                }         
                         });
     }
 
-    public isSelected(estadoId: string){
-        return this.estadoService.LocalStorage.obterUsuario().estado === estadoId;
+    public isSelected(estadoId: string): boolean{
+        return this.estadoService.LocalStorage.obterUsuario() ?
+               this.estadoService.LocalStorage.obterEstado() === estadoId : false;
     }
 
     public onChange(idEstadoSelecionado: string){
+        this.estadoService.LocalStorage.salvarEstado(this.estados[0]?.id);
         this.estadoSelecionado.emit(idEstadoSelecionado);
     }
 }

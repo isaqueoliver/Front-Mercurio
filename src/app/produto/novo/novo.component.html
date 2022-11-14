@@ -16,71 +16,36 @@
 
                 <div class="form-group">
                     <label class="control-label">Mercado</label>
-                    <select class="form-control" id="MercadoId" formControlName="MercadoId" [ngClass]="{'is-invalid': displayMessage['MercadoId'] }">
-                        <option *ngFor="let Mercado of Mercadoes" value="{{ Mercado.id }}">{{ Mercado.nome }}</option>
+                    <select class="form-control" id="mercadoId" formControlName="mercadoId" [ngClass]="{'is-invalid': displayMessage['mercadoId'] }">
+                        <option selected hidden value="">Selecione um Mercado (requerido)</option>
+                        <option *ngFor="let mercado of mercados" value="{{ mercado.id }}">{{ mercado.nome }} - {{ mercado.endereco }}</option>
                     </select>
-                    <span class="text-danger" *ngIf="displayMessage['MercadoId']">
-                        <p [innerHTML]="displayMessage['MercadoId']"></p>
+                    <span class="text-danger" *ngIf="displayMessage['mercadoId']">
+                        <p [innerHTML]="displayMessage['mercadoId']"></p>
                     </span>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label">Nome</label>
-                    <div>
-                        <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)" formControlName="nome" [ngClass]="{'is-invalid': displayMessage['nome'] }" />
-                        <span class="text-danger" *ngIf="displayMessage['nome']">
-                            <p [innerHTML]="displayMessage['nome']"></p>
-                        </span>
-                    </div>
+                    <label class="control-label">Produto</label>
+                    <select class="form-control" id="produtoId" formControlName="produtoId"
+                            #produtoId (change)="produtoUrl(produtoId.value)"
+                            [ngClass]="{'is-invalid': displayMessage['produtoId'] }">
+                        <option selected hidden value="">Selecione um Produto (requerido)</option>
+                        <option *ngFor="let produto of produtos" value="{{ produto.id }}">{{ produto.nome }}</option>
+                    </select>
+                    <span class="text-danger" *ngIf="displayMessage['produtoId']">
+                        <p [innerHTML]="displayMessage['produtoId']"></p>
+                    </span>
                 </div>
-
-                <!-- <div class="form-group">
-                    <label class="control-label">Marca</label>
-                    <div>
-                        <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)" formControlName="nome" [ngClass]="{'is-invalid': displayMessage['nome'] }" />
-                        <span class="text-danger" *ngIf="displayMessage['nome']">
-                            <p [innerHTML]="displayMessage['nome']"></p>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label">Caracteristica</label>
-                    <div>
-                        <input class="form-control" id="nome" type="text" placeholder="Nome (requerido)" formControlName="nome" [ngClass]="{'is-invalid': displayMessage['nome'] }" />
-                        <span class="text-danger" *ngIf="displayMessage['nome']">
-                            <p [innerHTML]="displayMessage['nome']"></p>
-                        </span>
-                    </div>
-                </div> -->
 
                 <div class="form-group">
                     <label class="control-label">Imagem do Produto</label>
 
                     <div class="custom-file">
-                        <img src="https://i.imgur.com/QubgFZO.png" title="source: imgur.com" />
+                        <img [src]="imageProduto" title="source: imgur.com"
+                             style="height: 350px; width:300px;" />
                     </div>
                     
-
-                    <!-- <div class="custom-file">
-                        <input type="file" accept="image/jpeg,image/png" class="custom-file-input" id="imagem" formControlName="imagem" (change)="fileChangeEvent($event)" [ngClass]="{'is-invalid': displayMessage['imagem'] }">
-                        <label data-browse="Procurar" style="width: 400px" class="custom-file-label"></label>
-                        <span *ngIf='imagemNome'><br>{{ imagemNome }}<br></span>
-                        <span class="text-danger" *ngIf="displayMessage['imagem']">
-                            <p [innerHTML]="displayMessage['imagem']"></p>
-                        </span>
-                    </div>
-
-                    <div *ngIf='imagemNome' class="row">
-                        <div class="col col-md-6">
-                            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false" [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="4 / 3" [resizeToWidth]="256" [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false"
-                                [canvasRotation]="canvasRotation" [transform]="transform" [alignImage]="'left'" [style.display]="showCropper ? null : 'none'" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady($event)"
-                                (loadImageFailed)="loadImageFailed()"></image-cropper>
-                        </div>
-                        <div class="col col-md-6">
-                            <img [src]="croppedImage" [style.border]="croppedImage ? '1px solid black' : 'none'" />
-                        </div>
-                    </div> -->
                 </div>
 
                 <div class="form-group">
@@ -92,12 +57,6 @@
                         </span>
                     </div>
                 </div>
-
-                <!-- <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" id="ativo" formControlName="ativo" name="ativo" value="true"> Ativo?
-                    </label>
-                </div> -->
 
                 <div class="form-group">
                     <input type="submit" id="cadastroProduto" [disabled]="!produtoForm.valid" value="Cadastrar" class="btn btn-primary">&nbsp;

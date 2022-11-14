@@ -32,3 +32,25 @@ export interface Claims {
     value: string,
     type: string
 }
+
+function UsuarioTokenAtualizarEstado(user: UsuarioToken, estadoId: string): UsuarioToken {
+    return <UsuarioToken>{
+        id: user['id'] || '',
+        cidade: user['cidade'] || '',
+        estado: estadoId,
+        email: user['email'] || '',
+        claims: user['claims'] || []
+    }
+}
+
+function UsuarioTokenAtualizarCidade(user: UsuarioToken, cidadeId: string): UsuarioToken {
+    var teste = user['estado'];
+    console.log(teste);
+    return <UsuarioToken>{
+        id: user['id'] || '',
+        cidade: cidadeId,
+        estado: user['estado'] || '',
+        email: user['email'] || '',
+        claims: user['claims'] || []
+    }
+}

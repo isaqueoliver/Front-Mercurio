@@ -12,7 +12,9 @@
                 <button class="btn btn-outline-success" type="submit">Pesquisar</button>
             </form>
 
-            <carousel-produto [produtos]="produtos"></carousel-produto>
+            <hr />
+            <carousel-produto [produtos]="produtosValorMedio"></carousel-produto>
+            <hr class="my-3" />
 
         </div>
     </div>
@@ -22,8 +24,7 @@
 <div class="container main-container">
     <div class="row text-center">
 
-        <!-- <lista-produto class="row" [produtos]="produtos"></lista-produto> -->
-        <app-lista></app-lista>
+        <app-lista-produto [produtos]="produtos"></app-lista-produto>
 
     </div>
 </div>

@@ -5,28 +5,22 @@ import { Observable } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 
 import { BaseService } from 'src/app/services/base.service';
-import { Carrinho } from '../models/carrinho';
+import { Carrinho, ItemCarrinhoRequest } from '../models/carrinho';
 
 @Injectable()
 export class CarrinhoService extends BaseService {
 
     constructor(private http: HttpClient) { super() }
 
-    obterTodos(): Observable<Carrinho[]> {
+    obterCarrinho(): Observable<Carrinho> {
         return this.http
-            .get<Carrinho[]>(this.UrlServiceV1 + "carrinhos", super.ObterAuthHeaderJson())
+            .get<Carrinho>(this.UrlServiceV1 + "Carrinho/Obter", super.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 
-    obterPorId(id: string): Observable<Carrinho> {
+    adicionarItem(itemCarrinho: ItemCarrinhoRequest): Observable<Carrinho> {
         return this.http
-            .get<Carrinho>(this.UrlServiceV1 + "carrinhos/" + id, super.ObterAuthHeaderJson())
-            .pipe(catchError(super.serviceError));
-    }
-
-    novoCarrinho(carrinho: Carrinho): Observable<Carrinho> {
-        return this.http
-            .post(this.UrlServiceV1 + "carrinhos", carrinho, super.ObterAuthHeaderJson())
+            .post(this.UrlServiceV1 + "Carrinho/Adicionar-Item", itemCarrinho, super.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));

@@ -30,7 +30,7 @@ export abstract class BaseGuard {
                     this.navegarAcessoNegado();
                 }
                 
-                let valoresClaim = userClaims.value as string;
+                let valoresClaim = userClaims?.value as string;
 
                 if (!valoresClaim.includes(claim.valor)) {
                     this.navegarAcessoNegado();

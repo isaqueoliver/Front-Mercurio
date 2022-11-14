@@ -9,7 +9,7 @@ import { CarrinhoRoutingModule } from './carrinho.route';
 import { CarrinhoAppComponent } from './carrinho.app.component';
 import { ListaComponent } from './lista/lista.component';
 import { CarrinhoService } from './services/carrinho.service';
-import { CarrinhoResolve } from './services/carrinho.resolve';
+// import { CarrinhoResolve } from './services/carrinho.resolve';
 import { CarrinhoGuard } from './services/carrinho.guard';
 
 @NgModule({
@@ -27,7 +27,7 @@ import { CarrinhoGuard } from './services/carrinho.guard';
   ],
   providers: [
     CarrinhoService,
-    CarrinhoResolve,
+    // CarrinhoResolve,
     CarrinhoGuard
   ]
 })

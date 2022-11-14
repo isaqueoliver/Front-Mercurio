@@ -1,13 +1,15 @@
-import { Produto, Mercado } from './models/produto';
+import { ProdutoResponse, ProdutoUsuarioRequest } from './models/produto';
 import { FormGroup } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 
 import { FormBaseComponent } from '../base-components/form-base.component';
+import { Mercado } from '../mercado/models/mercado';
 
 export abstract class ProdutoBaseComponent extends FormBaseComponent {
     
-    produto: Produto = {} as Produto;
-    Mercadoes: Mercado[] = [];
+    produto = {} as ProdutoUsuarioRequest;
+    produtos: ProdutoResponse[] = [];
+    mercados: Mercado[] = [];
     errors: any[] = [];
     produtoForm: FormGroup = {} as FormGroup;
 
@@ -15,21 +17,11 @@ export abstract class ProdutoBaseComponent extends FormBaseComponent {
         super();
 
         this.validationMessages = {
-            MercadoId: {
+            mercadoId: {
                 required: 'Escolha um Mercado',
             },
-            nome: {
-                required: 'Informe o Nome',
-                minlength: 'Mínimo de 2 caracteres',
-                maxlength: 'Máximo de 200 caracteres'
-            },
-            descricao: {
-                required: 'Informe a Descrição',
-                minlength: 'Mínimo de 2 caracteres',
-                maxlength: 'Máximo de 1000 caracteres'
-            },
-            imagem: {
-                required: 'Informe a Imagem',
+            produtoId: {
+                required: 'Escolha um Produto'
             },
             valor: {
                 required: 'Informe o Valor',

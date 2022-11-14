@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { ControlContainer, FormControlDirective, FormGroupDirective } from "@angular/forms";
+import { delay, takeLast, takeUntil } from "rxjs";
 import { ContaService } from "src/app/conta/services/conta.service";
 import { Cidade } from "../models/cidade";
 import { CidadeService } from "../services/cidade.service";
@@ -32,6 +33,7 @@ export class SelectCidadeComponent implements OnInit, OnChanges {
     }
 
     public onChange(idCidadeSelecionado: string){
+        this.cidadeService.LocalStorage.salvarCidade(this.cidades[0]?.id);
         this.cidadeSelecionado.emit(idCidadeSelecionado);
     }
 
@@ -45,7 +47,13 @@ export class SelectCidadeComponent implements OnInit, OnChanges {
             this.cidadeService.obterCidadesPorEstado(this.estadoId)
                         .subscribe(
                             Cidades => { 
-                                this.cidades = Cidades
+                                this.cidades = Cidades;
+                                if(this.cidadeService.LocalStorage.obterTokenUsuario())
+                                    this.cidadeSelecionado.emit(this.cidadeService.LocalStorage.obterCidade());
+                                else{
+                                    this.cidadeService.LocalStorage.salvarCidade(this.cidades[0]?.id);
+                                    this.cidadeSelecionado.emit(this.cidades[0]?.id);
+                                }
                         });
         }
     }

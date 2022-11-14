@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Mercado } from '../models/mercado';
 import { MercadoService } from '../services/mercado.service';
 import { environment } from 'src/environments/environment';
+import { LocalStorageUtils } from 'src/app/utils/localstorage';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lista',
@@ -13,28 +15,22 @@ export class ListaComponent implements OnInit {
 
   public mercados: Mercado[] = [];
   errorMessage: string = "";
+  localStorage = new LocalStorageUtils();
 
-  constructor(private mercadoService: MercadoService) { }
+  constructor(private mercadoService: MercadoService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    // this.mercadoService.obterTodos()
-    //   .subscribe({
-    //     next: mercados => this.mercados = mercados,
-    //     error: error => this.errorMessage
-    //   });
-    this.mercados = [
-      {
-        dataCadastro: '19/04/2022',
-        id: '1234',
-        nome: 'Garcias',
-        endereco: 'Rua Teste, n540, Bairro Teste'
-      },
-      {
-        dataCadastro: '19/04/2022',
-        id: '1234',
-        nome: 'Bretas',
-        endereco: 'Rua Joao, numero 845, Bairro Treza'
-      },
-    ];
+    this.mercadoService
+          .obterTodosPorEstadoCidade(this.localStorage.obterEstado(),
+                                     this.localStorage.obterCidade())
+          .subscribe({
+            next: mercados => this.mercados = mercados,
+            error: error => this.errorMessage
+          });
+  }
+
+  processarFalha(fail: any) {
+    this.toastr.error('Ocorreu um erro!', 'Opa :(');
   }
 }

@@ -1,11 +1,8 @@
 export interface Mercado {
   id: string,
   nome: string,
+  estado: string,
+  cidade: string,
   endereco: string,
-  dataCadastro: string
-}
-
-export interface Mercado{
-  id: string,
-  nome: string,
+  imagem: string
 }

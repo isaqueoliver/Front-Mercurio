@@ -27,6 +27,5 @@ export class MenuComponent {
   }
 
   public salvarCidade(cidadeId: any){
-    console.log(cidadeId);
   }
 }

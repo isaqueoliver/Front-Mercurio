@@ -8,7 +8,7 @@
         <p>
             <a class="btn btn-outline-danger">Excluir Carrinho</a>
         </p>
-        <div *ngFor="let produto of carrinho.produtos" class="card w-auto">
+        <div *ngFor="let produto of carrinho.itens" class="card w-auto">
             <div class="row g-0 w-auto">
                 <div class="col-md-4">
                     <img src="{{ produto.imagem }}" class="mg-fluid img-thumbnail" style="max-width: 110px !important;" alt="...">

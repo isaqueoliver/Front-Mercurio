@@ -12,12 +12,15 @@ import { NovoComponent } from './novo/novo.component';
 import { ProdutoService } from './services/produto.service';
 import { ProdutoResolve } from './services/produto.resolve';
 import { ProdutoGuard } from './services/produto.guard';
+import { ListaProdutosComponent } from './shared/lista-produtos.component';
+import { CarrinhoModule } from '../carrinho/carrinho.module';
 
 @NgModule({
   declarations: [
     ProdutoAppComponent,
     ListaComponent,
     NovoComponent,
+    ListaProdutosComponent
   ],
   imports: [
     CommonModule,
@@ -25,9 +28,10 @@ import { ProdutoGuard } from './services/produto.guard';
     NgxSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
-    ImageCropperModule
+    ImageCropperModule,
+    CarrinhoModule
   ],
-  exports: [ ListaComponent ],
+  exports: [ ListaProdutosComponent ],
   providers: [
     ProdutoService,
     ProdutoResolve,

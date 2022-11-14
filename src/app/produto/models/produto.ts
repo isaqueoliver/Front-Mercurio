@@ -1,25 +1,22 @@
-export interface Produto {
-  id: string,
-  nome: string,
-  descricao: string,
-  imagem: string
-}
-
-export interface ProdutoUsuario {
+export interface ProdutoResponse {
   id: string,
   nome: string,
   imagem: string,
-  mercado: string,
-  valor: number,
-  dataCadastro: string
+  mercado: string;
+  valor: number;
 }
 
-export interface Mercado{
-  id: string,
+export interface ProdutoUsuarioRequest {
+  produtoId: string;
+  mercadoId: string;
+  valor: number;
+}
+
+export interface ProdutoUsuarioResponse {
+  produtoId: string,
   nome: string,
-}
-
-export interface Marca {
-  id: string,
-  nome: string
+  imagem: string,
+  mercadoId: string,
+  mercado: string;
+  valor: number;
 }

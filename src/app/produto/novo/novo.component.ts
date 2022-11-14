@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { Observable, fromEvent, merge } from 'rxjs';
 
 import { ToastrService } from 'ngx-toastr';
-import { ImageCroppedEvent, ImageTransform, Dimensions } from 'ngx-image-cropper';
 
 import { ProdutoService } from '../services/produto.service';
 import { CurrencyUtils } from 'src/app/utils/currency-utils';
 import { ProdutoBaseComponent } from '../produto-form.base.component';
+import { LocalStorageUtils } from 'src/app/utils/localstorage';
 
 
 @Component({
@@ -20,46 +20,28 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
 
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[] = [];
 
-  imageChangedEvent: any = '';
-  croppedImage: any = '';
-  canvasRotation = 0;
-  rotation = 0;
-  scale = 1;
-  showCropper = false;
-  containWithinAspectRatio = false;
-  transform: ImageTransform = {};
-  imageURL: string = '';
-  imagemNome: string = '';
-
   constructor(private fb: FormBuilder,
     private produtoService: ProdutoService,
     private router: Router,
     private toastr: ToastrService) { super(); }
 
+  localStore = new LocalStorageUtils();
+  public imageProduto = 'https://i.imgur.com/QubgFZO.png';
+
   ngOnInit(): void {
 
-    // this.produtoService.obterMercadoes()
-    //   .subscribe(
-    //     Mercadoes => this.Mercadoes = Mercadoes);
-
-        this.Mercadoes = [{
-          id: '1',
-          nome: 'Bretas'
-        },{
-          id: '2',
-          nome: 'Consul'
-        },{
-          id: '3',
-          nome: 'Garcias'
-        },];
+    this.produtoService.obterMercados(this.localStore.obterEstado(),
+                                      this.localStore.obterCidade())
+                        .subscribe(
+                          mercados => this.mercados = mercados);
+    this.produtoService.obterTodos().subscribe(
+      produtos => this.produtos = produtos
+    );
 
     this.produtoForm = this.fb.group({
-      MercadoId: ['', [Validators.required]],
-      nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
-      descricao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1000)]],
-      imagem: ['', [Validators.required]],
-      valor: ['', [Validators.required]],
-      ativo: [true]
+      mercadoId: ['', [Validators.required]],
+      produtoId: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
+      valor: ['', [Validators.required]]
     });
   }
 
@@ -71,10 +53,6 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
     if (this.produtoForm.dirty && this.produtoForm.valid) {
       this.produto = Object.assign({}, this.produto, this.produtoForm.value);
 
-      // this.produto.imagemUpload = this.croppedImage.split(',')[1];
-      // this.produto.imagem = this.imagemNome;
-      // this.produto.valor = CurrencyUtils.StringParaDecimal(this.produto.valor.toString()) || 0;
-
       this.produtoService.novoProduto(this.produto)
         .subscribe({
           next: sucesso => { this.processarSucesso(sucesso) },
@@ -83,6 +61,11 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
 
       this.mudancasNaoSalvas = false;
     }
+  }
+
+  produtoUrl(idProdutoSelecionado: string){
+    const imagemProdutoSelecionado = this.produtos.find(p => p.id === idProdutoSelecionado)?.imagem;
+    this.imageProduto = imagemProdutoSelecionado ? imagemProdutoSelecionado : 'https://i.imgur.com/QubgFZO.png';
   }
 
   processarSucesso(response: any) {
@@ -100,23 +83,6 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
   processarFalha(fail: any) {
     this.errors = fail.error.errors;
     this.toastr.error('Ocorreu um erro!', 'Opa :(');
-  }
-
-  fileChangeEvent(event: any): void {
-    this.imageChangedEvent = event;
-    this.imagemNome = event.currentTarget.files[0].name;
-  }
-  imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.base64;
-  }
-  imageLoaded() {
-    this.showCropper = true;
-  }
-  cropperReady(sourceImageDimensions: Dimensions) {
-    console.log('Cropper ready', sourceImageDimensions);
-  }
-  loadImageFailed() {
-    this.errors.push('O formato do arquivo ' + this.imagemNome + ' não é aceito.');
   }
 }
 

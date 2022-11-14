@@ -12,9 +12,10 @@ export class MercadoService extends BaseService {
 
     constructor(private http: HttpClient) { super() }
 
-    obterTodos(): Observable<Mercado[]> {
+    obterTodosPorEstadoCidade(estadoId: string, cidadeId: string): Observable<Mercado[]> {
         return this.http
-            .get<Mercado[]>(this.UrlServiceV1 + "mercados", super.ObterAuthHeaderJson())
+            .get<Mercado[]>(this.UrlServiceV1 + `Mercado/ObterPorEstadoECidade/${estadoId}/${cidadeId}`,
+                            super.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 

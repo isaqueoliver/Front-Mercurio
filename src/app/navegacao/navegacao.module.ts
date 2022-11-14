@@ -11,7 +11,6 @@ import { InserirValorComponent } from "./inserir-valor/inserir-valor.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MenuLoginComponent } from './menu-login/menu-login.component';
 import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
-import { ListaProdutosComponent } from './produtos/lista-produtos.component';
 import { CarouselProdutosComponent } from "./produtos/carousel-produtos.component";
 import { ProdutoModule } from "../produto/produto.module";
 import { EstadoModule } from "../estado/estado.module";
@@ -26,7 +25,6 @@ import { CidadeModule } from "../cidade/cidade.module";
         NotFoundComponent,
         AcessoNegadoComponent,
         InserirValorComponent,
-        ListaProdutosComponent,
         CarouselProdutosComponent
     ],
     imports: [

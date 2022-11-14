@@ -3,19 +3,22 @@
     <h1>Lista de Mercados</h1>
     <hr>
 
-    <!-- <p>
-        <a class="btn btn-info" [routerLink]="['/mercados/adicionar-novo']">Novo Mercado</a>
-    </p> -->
-
     <div *ngFor="let mercado of mercados" class="card mb-3 w-auto">
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="https://i.imgur.com/QubgFZO.png" class="img-fluid rounded-start" alt="...">
+                <img src="{{ mercado.imagem }}" 
+                     class="img-fluid rounded-start"
+                     style="height: 185px; width: 280px;"
+                     alt="{{ mercado.nome }}">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">{{ mercado.nome }}</h5>
-                    <p class="card-text">{{ mercado.endereco }}</p>
+                    <div class="card-text">
+                        <p>{{ mercado.estado }}</p>
+                        <p>{{ mercado.cidade }}</p>
+                        <p>{{ mercado.endereco }}</p>
+                    </div>
                 </div>
             </div>
         </div>

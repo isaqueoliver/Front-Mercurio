@@ -3,12 +3,12 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Carrinho } from '../models/carrinho';
 import { CarrinhoService } from './carrinho.service';
 
-@Injectable()
-export class CarrinhoResolve implements Resolve<Carrinho> {
+// @Injectable()
+// export class CarrinhoResolve implements Resolve<Carrinho> {
 
-    constructor(private carrinhoService: CarrinhoService) { }
+//     constructor(private carrinhoService: CarrinhoService) { }
 
-    resolve(route: ActivatedRouteSnapshot) {
-        return this.carrinhoService.obterPorId(route.params['id']);
-    }
-}
+//     // resolve(route: ActivatedRouteSnapshot) {
+//     //     return this.carrinhoService.obterPorId(route.params['id']);
+//     // }
+// }
