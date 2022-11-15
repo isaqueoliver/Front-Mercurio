@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 
 import { BaseService } from 'src/app/services/base.service';
-import { Reporte } from '../models/reporte';
+import { Assunto, Reporte, ReporteRequest } from '../models/reporte';
 
 @Injectable()
 export class ReporteService extends BaseService {
@@ -14,27 +14,23 @@ export class ReporteService extends BaseService {
 
     obterTodos(): Observable<Reporte[]> {
         return this.http
-            .get<Reporte[]>(this.UrlServiceV1 + "reportes", super.ObterAuthHeaderJson())
+            .get<Reporte[]>(this.UrlServiceV1 + "Reporte/ObterTodos", super.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
+
+    obterAssuntos(): Observable<Assunto[]> {
+        return this.http
+            .get<Assunto[]>(this.UrlServiceV1 + "Assunto/ObterTodos", super.ObterAuthHeaderJson())
             .pipe(catchError(super.serviceError));
     }
 
     obterPorId(id: string): Observable<Reporte> {
-        return this.http
-            .get<Reporte>(this.UrlServiceV1 + "reportes/" + id, super.ObterAuthHeaderJson())
-            .pipe(catchError(super.serviceError));
+        return new Observable();
     }
 
-    novoReporte(reporte: Reporte): Observable<Reporte> {
+    novoReporte(reporte: ReporteRequest): Observable<Reporte> {
         return this.http
-            .post(this.UrlServiceV1 + "reportes", reporte, super.ObterAuthHeaderJson())
-            .pipe(
-                map(super.extractData),
-                catchError(super.serviceError));
-    }
-
-    atualizarReporte(reporte: Reporte): Observable<Reporte> {
-        return this.http
-            .put(this.UrlServiceV1 + "reportes/" + reporte.id, reporte, super.ObterAuthHeaderJson())
+            .post(this.UrlServiceV1 + "Reporte/Adicionar", reporte, super.ObterAuthHeaderJson())
             .pipe(
                 map(super.extractData),
                 catchError(super.serviceError));

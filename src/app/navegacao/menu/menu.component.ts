@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Estado } from '../../estado/models/estado';
-import { EstadoService } from '../../estado/services/estado.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-menu',
@@ -12,8 +11,7 @@ export class MenuComponent {
   public isCollapsed: boolean;
   public estadoSelecionado = "";
 
-  constructor(private router: Router,
-    private estadoService: EstadoService) {
+  constructor(private router: Router) {
     this.isCollapsed = true;
   }
 
@@ -22,10 +20,11 @@ export class MenuComponent {
     return currentRoute === nameRoute ? 'active' : '';
   }
 
-  public carregarCidades(estadoId: any){
+  public carregarCidades(estadoId: string){
     this.estadoSelecionado = estadoId;
   }
 
-  public salvarCidade(cidadeId: any){
+  public salvarCidade(){
+    this.router.navigate(['/home']);
   }
 }

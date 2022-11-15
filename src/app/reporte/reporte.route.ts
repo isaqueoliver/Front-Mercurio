@@ -9,12 +9,14 @@ const reporteRouterConfig: Routes = [
     {
         path: '', component: ReporteAppComponent,
         children: [
-            { path: 'listar-todos', component: ListaComponent },
+            { 
+                path: 'listar-todos', component: ListaComponent,
+                canActivate: [ReporteGuard]
+            },
             {
                 path: 'adicionar-novo', component: NovoComponent,
                 canDeactivate: [ReporteGuard],
-                //canActivate: [ReporteGuard],
-                data: [{ claim: { nome: 'Reporte', valor: 'Adicionar' } }],
+                canActivate: [ReporteGuard]
             },
         ]
     }

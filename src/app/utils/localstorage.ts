@@ -3,7 +3,7 @@ import { UsuarioResponse, UsuarioToken } from "../conta/models/usuario";
 export class LocalStorageUtils {
     
     public obterUsuario(): UsuarioToken {
-        return JSON.parse(localStorage.getItem('mercurio.user') || '');
+        return JSON.parse(localStorage.getItem('mercurio.user') || this.UsuarioTokenEmpty());
     }
 
     public salvarDadosLocaisUsuario(response: UsuarioResponse): void {
@@ -21,47 +21,40 @@ export class LocalStorageUtils {
     }
 
     public salvarTokenUsuario(token: string): void {
-        console.log(token);
         localStorage.setItem('mercurio.token', token);
+    }
+
+    public obterCidade(): string {
+        return localStorage.getItem('mercurio.cidade') || '';
+    }
+
+    public obterEstado(): string {
+        return localStorage.getItem('mercurio.estado') || '';
+    }
+
+    public salvarEstado(estadoId: string): void {
+        localStorage.setItem('mercurio.estado', estadoId);
+    }
+
+    public salvarCidade(cidadeId: string): void {
+        localStorage.setItem('mercurio.cidade', cidadeId);
     }
 
     public salvarUsuario(user: UsuarioToken): void {
         localStorage.setItem('mercurio.user', JSON.stringify(user));
+        this.salvarEstado(user['estado']);
+        this.salvarCidade(user['cidade']);
     }
 
-    public obterCidade(): string {
-        return this.obterUsuario()['cidade'] || '';
+    public usuarioEstaLogado(): boolean {
+        return this.obterTokenUsuario() !== null;
     }
 
-    public obterEstado(): string {
-        return this.obterUsuario()['estado'] || '';
-    }
-
-    public salvarEstado(estadoId: string): void {
-        localStorage.setItem('mercurio.user', JSON.stringify(this.UsuarioTokenAtualizarEstado(this.obterUsuario(), estadoId)));
-    }
-
-    public salvarCidade(cidadeId: string): void {
-        localStorage.setItem('mercurio.user', JSON.stringify(this.UsuarioTokenAtualizarCidade(this.obterUsuario(), cidadeId)));
-    }
-
-    UsuarioTokenAtualizarEstado(user: UsuarioToken, estadoId: string): UsuarioToken {
-        return <UsuarioToken>{
-            id: user['id'] || '',
-            cidade: user['cidade'] || '',
-            estado: estadoId,
-            email: user['email'] || '',
-            claims: user['claims'] || []
-        }
-    }
-
-    UsuarioTokenAtualizarCidade(user: UsuarioToken, cidadeId: string): UsuarioToken {
-        return <UsuarioToken>{
-            id: user['id'] || '',
-            cidade: cidadeId,
-            estado: user['estado'] || '',
-            email: user['email'] || '',
-            claims: user['claims'] || []
-        }
-    }
+    UsuarioTokenEmpty = (): string => (JSON.stringify({
+        id: '',
+        cidade: '',
+        email: '',
+        estado: '',
+        claims: []
+    }));
 }

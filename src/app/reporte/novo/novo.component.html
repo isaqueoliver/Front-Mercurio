@@ -14,18 +14,16 @@
                     </ul>
                 </div>
 
-                <div class="form-group my-3">
+                <div class="form-group">
                     <label class="control-label">Assunto</label>
-                    <div>
-                        <select class="form-select w-100" id="assunto" formControlName="assunto"
-                            [ngClass]="{'is-invalid': displayMessage['assunto'] }" aria-label="Assunto">
-                            <option value="" hidden selected>Selecione uma opção</option>
-                            <option>Está faltando o nome de um Supermercado/Mercado</option>
-                        </select>
-                        <span class="text-danger" *ngIf="displayMessage['assunto']">
-                            <p [innerHTML]="displayMessage['assunto']"></p>
-                        </span>
-                    </div>
+                    <select class="form-control" id="assuntoId" formControlName="assuntoId"
+                            [ngClass]="{'is-invalid': displayMessage['assuntoId'] }">
+                        <option selected hidden value="">Selecione um Assunto (requerido)</option>
+                        <option *ngFor="let assunto of assuntos" value="{{ assunto.id }}">{{ assunto.descricao }}</option>
+                    </select>
+                    <span class="text-danger" *ngIf="displayMessage['assuntoId']">
+                        <p [innerHTML]="displayMessage['assuntoId']"></p>
+                    </span>
                 </div>
 
                 <div class="form-group my-3">

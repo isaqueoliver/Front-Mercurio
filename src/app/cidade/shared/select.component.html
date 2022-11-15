@@ -1,3 +1,6 @@
 <select class="form-select w-auto mx-2 flex-grow-1" #cidadeId (change)="onChange(cidadeId.value)" aria-label="Cidade">
-    <option *ngFor="let cidade of cidades" value="{{ cidade.id }}">{{ cidade.nome }}</option>
+    <option *ngFor="let cidade of cidades" value="{{ cidade.id }}"
+            [attr.selected]="isSelected(cidade.id)">
+        {{ cidade.nome }}
+    </option>
 </select>

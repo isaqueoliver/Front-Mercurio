@@ -33,22 +33,22 @@ export class SelectCidadeComponent implements OnInit, OnChanges {
     }
 
     public onChange(idCidadeSelecionado: string){
-        this.cidadeService.LocalStorage.salvarCidade(this.cidades[0]?.id);
+        this.cidadeService.LocalStorage.salvarCidade(idCidadeSelecionado);
         this.cidadeSelecionado.emit(idCidadeSelecionado);
     }
 
-    public isSelected(cidadeId: string){
-        return this.cidadeService.LocalStorage.obterUsuario().cidade === cidadeId ? 'selected' : '';
+    public isSelected(cidadeId: string): boolean | null{
+        return this.cidadeService.LocalStorage.obterCidade() === cidadeId ? true : null;
     }
 
     buscarCidades(){
-        if(this.estadoId.length > 0)
+        if(!!this.estadoId)
         {
             this.cidadeService.obterCidadesPorEstado(this.estadoId)
                         .subscribe(
                             Cidades => { 
                                 this.cidades = Cidades;
-                                if(this.cidadeService.LocalStorage.obterTokenUsuario())
+                                if(!!this.cidadeService.LocalStorage.obterCidade())
                                     this.cidadeSelecionado.emit(this.cidadeService.LocalStorage.obterCidade());
                                 else{
                                     this.cidadeService.LocalStorage.salvarCidade(this.cidades[0]?.id);

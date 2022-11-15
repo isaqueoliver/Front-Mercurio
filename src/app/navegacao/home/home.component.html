@@ -9,12 +9,20 @@
                     <option value="1" selected>Produto</option>
                     <option value="2">Mercado</option>
                 </select>
-                <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+                <button class="btn btn-outline-success" type="submit" [disabled]="!produtosValorMedio">Pesquisar</button>
             </form>
 
-            <hr />
-            <carousel-produto [produtos]="produtosValorMedio"></carousel-produto>
-            <hr class="my-3" />
+            <carousel-produto *ngIf="!!produtosValorMedio" [produtos]="produtosValorMedio"></carousel-produto>
+
+            <div class="py-5" *ngIf="!produtosValorMedio">
+                <h1>
+                    Parece que não há nenhum produto registrado nessa cidade! :(
+                </h1>
+                <br />
+                <h3>
+                    Seja você o primeiro e adicione um <a href="/produtos/listar-todos">produto aqui</a>! :D
+                </h3>
+            </div>
 
         </div>
     </div>

@@ -25,17 +25,17 @@
                     <app-select-estado (estadoSelecionado)="carregarCidades($event)"></app-select-estado>
                     
                     <app-select-cidade [estadoId]="estadoSelecionado"
-                                       (cidadeSelecionado)="salvarCidade($event)">
+                                       (cidadeSelecionado)="salvarCidade()">
                     </app-select-cidade>
 
                     <li class="nav-item d-flex mx-1 flex-shrink-1">
                         <ul class="navbar-nav">
                             
                             <li class="nav-item">
-                                <a [ngClass]="['nav-link', isActive('mercados') ]" aria-current="Mercado" href="/mercados/listar-todos">Mercado</a>
+                                <a [ngClass]="['nav-link', isActive('mercados') ]" aria-current="Mercado" [routerLink]="['/mercados/listar-todos']">Mercado</a>
                             </li>
                             <li class="nav-item">
-                                <a [ngClass]="['nav-link', isActive('produtos') ]" aria-current="Produto" href="/produtos/listar-todos">Produto</a>
+                                <a [ngClass]="['nav-link', isActive('produtos') ]" aria-current="Produto" [routerLink]="['/produtos/listar-todos']">Produto</a>
                             </li>
 
                         </ul>

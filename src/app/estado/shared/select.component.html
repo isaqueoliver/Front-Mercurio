@@ -1,3 +1,6 @@
 <select class="form-select w-auto mx-2" #estadoId (change)="onChange(estadoId.value)" aria-label="Estado">
-    <option *ngFor="let estado of estados" value="{{ estado.id }}" [attr.selected]="isSelected(estado.id)">{{ estado.sigla }}</option>
+    <option *ngFor="let estado of estados" value="{{ estado.id }}"
+            [attr.selected]="isSelected(estado.id)">
+        {{ estado.sigla }}
+    </option>
 </select>

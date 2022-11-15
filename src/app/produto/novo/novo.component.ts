@@ -40,7 +40,7 @@ export class NovoComponent extends ProdutoBaseComponent implements OnInit {
 
     this.produtoForm = this.fb.group({
       mercadoId: ['', [Validators.required]],
-      produtoId: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(200)]],
+      produtoId: ['', [Validators.required]],
       valor: ['', [Validators.required]]
     });
   }

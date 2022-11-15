@@ -1,4 +1,4 @@
-import { Reporte } from './models/reporte';
+import { Reporte, ReporteRequest } from './models/reporte';
 import { FormGroup } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 
@@ -6,7 +6,7 @@ import { FormBaseComponent } from '../base-components/form-base.component';
 
 export abstract class ReporteBaseComponent extends FormBaseComponent {
     
-    reporte: Reporte = {} as Reporte;
+    reporte = {} as ReporteRequest;
     errors: any[] = [];
     reporteForm: FormGroup = {} as FormGroup;
 

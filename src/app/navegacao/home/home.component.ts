@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { CidadeService } from 'src/app/cidade/services/cidade.service';
 import { ProdutoUsuarioResponse } from 'src/app/produto/models/produto';
 import { ProdutoService } from 'src/app/produto/services/produto.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,17 +15,18 @@ export class HomeComponent implements OnInit {
   public produtosValorMedio: ProdutoUsuarioResponse[] = [];
   
   constructor(private produtoService: ProdutoService,
-    private toastr: ToastrService) { }
+    private router: Router,
+    private toastr: ToastrService) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => {
+        return false;
+      };
+  }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
-    this.carregarProdutos();
-  }
-
-  processarFalha(fail: any) {
-    this.toastr.error('Ocorreu um erro!', 'Opa :(');
+    if(!!this.produtoService.LocalStorage.obterCidade() &&
+    !!this.produtoService.LocalStorage.obterEstado()) {
+      this.carregarProdutos();
+    }
   }
 
   carregarProdutos(){
@@ -38,5 +41,9 @@ export class HomeComponent implements OnInit {
           next: produtosValorMedio => this.produtosValorMedio = produtosValorMedio,
           error: error => this.processarFalha(error)
         });
+  }
+
+  processarFalha(fail: any) {
+    this.toastr.error('Ocorreu um erro!', 'Opa :(');
   }
 }

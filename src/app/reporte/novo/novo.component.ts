@@ -10,6 +10,7 @@ import { ImageCroppedEvent, ImageTransform, Dimensions } from 'ngx-image-cropper
 import { ReporteService } from '../services/reporte.service';
 import { CurrencyUtils } from 'src/app/utils/currency-utils';
 import { ReporteBaseComponent } from '../reporte-form.base.component';
+import { Assunto } from '../models/reporte';
 
 
 @Component({
@@ -20,16 +21,7 @@ export class NovoComponent extends ReporteBaseComponent implements OnInit {
 
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[] = [];
 
-  imageChangedEvent: any = '';
-  croppedImage: any = '';
-  canvasRotation = 0;
-  rotation = 0;
-  scale = 1;
-  showCropper = false;
-  containWithinAspectRatio = false;
-  transform: ImageTransform = {};
-  imageURL: string = '';
-  imagemNome: string = '';
+  assuntos = [] as Assunto[];
 
   constructor(private fb: FormBuilder,
     private reporteService: ReporteService,
@@ -37,8 +29,13 @@ export class NovoComponent extends ReporteBaseComponent implements OnInit {
     private toastr: ToastrService) { super(); }
 
   ngOnInit(): void {
+    this.reporteService.obterAssuntos()
+      .subscribe({
+        next: assuntos => this.assuntos = assuntos
+      });
+
     this.reporteForm = this.fb.group({
-      assunto: ['', [Validators.required, Validators.minLength(2)]],
+      assuntoId: ['', [Validators.required]],
       descricao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(1000)]],
     });
   }
@@ -76,23 +73,6 @@ export class NovoComponent extends ReporteBaseComponent implements OnInit {
   processarFalha(fail: any) {
     this.errors = fail.error.errors;
     this.toastr.error('Ocorreu um erro!', 'Opa :(');
-  }
-
-  fileChangeEvent(event: any): void {
-    this.imageChangedEvent = event;
-    this.imagemNome = event.currentTarget.files[0].name;
-  }
-  imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.base64;
-  }
-  imageLoaded() {
-    this.showCropper = true;
-  }
-  cropperReady(sourceImageDimensions: Dimensions) {
-    console.log('Cropper ready', sourceImageDimensions);
-  }
-  loadImageFailed() {
-    this.errors.push('O formato do arquivo ' + this.imagemNome + ' não é aceito.');
   }
 }
 

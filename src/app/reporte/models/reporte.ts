@@ -7,6 +7,16 @@ export interface Reporte {
   resposta: string | null
 }
 
+export interface ReporteRequest {
+  assuntoId: string;
+  descricao: string;
+}
+
+export interface Assunto {
+  id: string;
+  descricao: string;
+}
+
 export class ReporteConstantes {
   static readonly STATUS_AGUARDANDO: string = "Aguardando Resposta...";
   static readonly STATUS_RESPONDIDO: string = "Respondido";
