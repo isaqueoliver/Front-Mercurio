@@ -37,6 +37,22 @@ export class ProdutoService extends BaseService {
         return {} as ProdutoResponse;
     }
 
+    obterPorNome(nome: string): Observable<ProdutoUsuarioResponse[]> {
+        return this.http
+            .get<ProdutoUsuarioResponse[]>(this.UrlServiceV1 +
+                                `ProdutoUsuario/ObterTodosPorProdutoNome/${nome}`,
+                                 super.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
+
+    obterPorMercadoId(mercadoId: string): Observable<ProdutoUsuarioResponse[]> {
+        return this.http
+            .get<ProdutoUsuarioResponse[]>(this.UrlServiceV1 +
+                                `ProdutoUsuario/ObterTodosPorMercado/${mercadoId}`,
+                                 super.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
+    }
+
     novoProduto(produto: ProdutoUsuarioRequest): Observable<ProdutoResponse> {
         return this.http
             .post(this.UrlServiceV1 + "ProdutoUsuario/Adicionar", produto, super.ObterAuthHeaderJson())

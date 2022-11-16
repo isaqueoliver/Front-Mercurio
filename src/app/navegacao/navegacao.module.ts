@@ -15,6 +15,7 @@ import { CarouselProdutosComponent } from "./produtos/carousel-produtos.componen
 import { ProdutoModule } from "../produto/produto.module";
 import { EstadoModule } from "../estado/estado.module";
 import { CidadeModule } from "../cidade/cidade.module";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { CidadeModule } from "../cidade/cidade.module";
         NgbModule,
         ProdutoModule,
         EstadoModule,
+        FormsModule,
         CidadeModule
     ],
     exports: [

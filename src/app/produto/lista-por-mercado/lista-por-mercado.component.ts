@@ -7,12 +7,12 @@ import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
-  selector: 'app-lista',
-  templateUrl: './lista.component.html'
+  selector: 'app-lista-por-mercado',
+  templateUrl: './lista-por-mercado.component.html'
 })
-export class ListaComponent implements OnInit {
+export class ListaPorMercadoComponent implements OnInit {
 
-  nomePesquisa: string | null = null;
+  mercadoId: string | null = null;
 
   public produtos: ProdutoUsuarioResponse[] = [];
 
@@ -22,26 +22,17 @@ export class ListaComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.nomePesquisa = params.get('nome');
+      this.mercadoId = params.get('id');
     });
 
-    this.nomePesquisa ?
-        this.obterProdutosPorNomePesquisa(this.nomePesquisa!) :
-        this.obterProdutosPorEstadoECidade();
+    if(this.mercadoId)
+        this.obterProdutosPorMercadoId(this.mercadoId!)
       
   }
 
-  obterProdutosPorEstadoECidade(){
-    this.produtoService.obterTodosPorEstadoECidade()
-      .subscribe({
-        next: produtos => this.produtos = produtos,
-        error: error => this.processarFalha(error)
-      });
-  }
-
-  obterProdutosPorNomePesquisa(nome: string){
+  obterProdutosPorMercadoId(mercadoId: string){
     this.produtoService
-          .obterPorNome(nome)
+          .obterPorMercadoId(mercadoId)
             .subscribe({
               next: produtos => this.produtos = produtos,
               error: error => this.processarFalha(error)

@@ -29,7 +29,6 @@ export class ProdutoGuard extends BaseGuard implements CanActivate, CanDeactivat
     }
 
     canActivate(routeAc: ActivatedRouteSnapshot) {
-        // return super.validarClaims(routeAc);
-        return true;
+        return super.validarClaims(routeAc);
     }    
 }

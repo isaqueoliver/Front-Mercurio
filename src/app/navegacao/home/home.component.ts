@@ -4,6 +4,7 @@ import { CidadeService } from 'src/app/cidade/services/cidade.service';
 import { ProdutoUsuarioResponse } from 'src/app/produto/models/produto';
 import { ProdutoService } from 'src/app/produto/services/produto.service';
 import { Router } from '@angular/router';
+import { Pesquisa } from '../models/pesquisa';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,8 @@ export class HomeComponent implements OnInit {
 
   public produtos: ProdutoUsuarioResponse[] = [];
   public produtosValorMedio: ProdutoUsuarioResponse[] = [];
+
+  public pesquisa = { tipo: 1, nome: '' } as Pesquisa;
   
   constructor(private produtoService: ProdutoService,
     private router: Router,
@@ -41,6 +44,12 @@ export class HomeComponent implements OnInit {
           next: produtosValorMedio => this.produtosValorMedio = produtosValorMedio,
           error: error => this.processarFalha(error)
         });
+  }
+
+  pesquisar(): void {
+    console.log(this.pesquisa);
+    if(this.pesquisa.tipo == 1) this.router.navigate([`/produtos/listar-todos/${this.pesquisa.nome}`]);
+    if(this.pesquisa.tipo == 2) this.router.navigate([`/mercados/listar-todos/${this.pesquisa.nome}`]);
   }
 
   processarFalha(fail: any) {

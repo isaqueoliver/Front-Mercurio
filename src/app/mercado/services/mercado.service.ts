@@ -25,29 +25,11 @@ export class MercadoService extends BaseService {
             .pipe(catchError(super.serviceError));
     }
 
-    novoMercado(mercado: Mercado): Observable<Mercado> {
+    obterPorNome(nome: string): Observable<Mercado[]> {
         return this.http
-            .post(this.UrlServiceV1 + "mercados", mercado, super.ObterAuthHeaderJson())
-            .pipe(
-                map(super.extractData),
-                catchError(super.serviceError));
+            .get<Mercado[]>(this.UrlServiceV1 + `Mercado/ObterTodosPorMercadoNome/${nome}`, super.ObterAuthHeaderJson())
+            .pipe(catchError(super.serviceError));
     }
-
-    atualizarMercado(mercado: Mercado): Observable<Mercado> {
-        return this.http
-            .put(this.UrlServiceV1 + "mercados/" + mercado.id, mercado, super.ObterAuthHeaderJson())
-            .pipe(
-                map(super.extractData),
-                catchError(super.serviceError));
-    }
-
-    excluirMercado(id: string): Observable<Mercado> {
-        return this.http
-            .delete(this.UrlServiceV1 + "mercados/" + id, super.ObterAuthHeaderJson())
-            .pipe(
-                map(super.extractData),
-                catchError(super.serviceError));
-    }    
 
     obterMercadoes(): Observable<Mercado[]> {
         return this.http

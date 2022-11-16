@@ -11,7 +11,8 @@ export abstract class BaseGuard {
 
         if(!this.localStorageUtils.obterTokenUsuario()){
             this.router.navigate(['/conta/login/'], { queryParams: { returnUrl: this.router.url }});
-        }  
+        } 
+        console.log("a");
 
         let user = this.localStorageUtils.obterUsuario();
 

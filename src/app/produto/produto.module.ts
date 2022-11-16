@@ -14,13 +14,15 @@ import { ProdutoResolve } from './services/produto.resolve';
 import { ProdutoGuard } from './services/produto.guard';
 import { ListaProdutosComponent } from './shared/lista-produtos.component';
 import { CarrinhoModule } from '../carrinho/carrinho.module';
+import { ListaPorMercadoComponent } from './lista-por-mercado/lista-por-mercado.component';
 
 @NgModule({
   declarations: [
     ProdutoAppComponent,
     ListaComponent,
     NovoComponent,
-    ListaProdutosComponent
+    ListaProdutosComponent,
+    ListaPorMercadoComponent
   ],
   imports: [
     CommonModule,

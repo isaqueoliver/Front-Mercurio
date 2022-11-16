@@ -4,7 +4,7 @@
     <hr>
 
     <div *ngFor="let mercado of mercados" class="card mb-3 w-auto">
-        <div class="row g-0">
+        <div class="row g-0" style="cursor: pointer;" [routerLink]="['/produtos/listar-por-mercado/', mercado.id]">
             <div class="col-md-4">
                 <img src="{{ mercado.imagem }}" 
                      class="img-fluid rounded-start"

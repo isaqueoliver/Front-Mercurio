@@ -15,12 +15,16 @@ import { CustomFormsModule } from 'ng2-validation'
 import { ContaGuard } from './services/conta.guard';
 import { EstadoModule } from '../estado/estado.module';
 import { CidadeModule } from '../cidade/cidade.module';
+import { ProdutoModule } from '../produto/produto.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ListaProdutosComponent } from './lista-produtos/lista-produtos.component';
 
 @NgModule({
   declarations: [
     ContaAppComponent,
     CadastroComponent, 
-    LoginComponent
+    LoginComponent,
+    ListaProdutosComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +35,9 @@ import { CidadeModule } from '../cidade/cidade.module';
     HttpClientModule,
     CustomFormsModule,
     EstadoModule,
-    CidadeModule
+    CidadeModule,
+    NgbModule,
+    ProdutoModule
   ],
   providers: [
     ContaService,
